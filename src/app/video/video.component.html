@@ -1,0 +1,61 @@
+<div class="container-fluid row mt-4">
+  <div class="col-9">
+    <div class="col"></div>
+    <div class="col" style="width: 851px; height: 465px; left: 0px; top: 0px;">
+      <vg-player (onPlayerReady)="onPlayerReady($event)">
+
+        <vg-overlay-play></vg-overlay-play>
+        <vg-buffering></vg-buffering>
+
+        <vg-controls>
+          <vg-play-pause></vg-play-pause>
+          <vg-playback-button></vg-playback-button>
+          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+          <vg-scrub-bar>
+            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+          </vg-scrub-bar>
+          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+          <vg-mute></vg-mute>
+          <vg-volume></vg-volume>
+          <vg-fullscreen></vg-fullscreen>
+        </vg-controls>
+        <!-- <video #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto" crossorigin controls> -->
+
+        <video #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto" crossorigin
+          class="video-stream html5-main-video">
+        </video>
+      </vg-player>
+    </div>
+    <div class="col"></div>
+
+  </div>
+  <div class="col-3">
+    <label class="display-4 text-center text-bold">PlayList</label>
+    <ul>
+      <li *ngFor="let item of playlist; let $index = index" (click)="onClickPlaylistItem(item, $index)"
+        [class.selected]="item === currentItem">
+        <!-- {{ item.title }} -->
+        <div class="card">
+          <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+          <video width="300" height="150">
+            <source src="{{item.vposter}}" type="video/mp4" />
+          </video>
+          <div class="card-body">
+            <p class="card-text">{{ item.title }}</p>
+          </div>
+        </div>
+
+
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="ml-3 text-center text-dark">
+  Jay swaminarayan
+</div>
+
+
+<!-- <iframe width="auto" height="auto" src="https://www.youtube.com/embed/KNbKEnkoQHA" frameborder="0"
+  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
