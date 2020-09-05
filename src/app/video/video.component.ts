@@ -140,7 +140,5 @@ export class VideoComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(faEye);
-  }
+  ngOnInit(): void {}
 }
