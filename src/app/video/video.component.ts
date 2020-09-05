@@ -1,6 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
-// import { VgAPI } from '@videogular/ngx-videogular/core';
+import {
+  faEye,
+  faThumbsUp,
+  faStar,
+  faHeart,
+  faList,
+  faFastForward,
+  faFastBackward,
+  faRedo,
+  faUndo,
+  faBookmark,
+} from '@fortawesome/free-solid-svg-icons';
+import * as far from '@fortawesome/free-regular-svg-icons';
 
 export interface IMedia {
   title: string;
@@ -16,6 +28,19 @@ export interface IMedia {
   providers: [VgApiService],
 })
 export class VideoComponent implements OnInit {
+  faEye = faEye;
+  faThumbsUp = faThumbsUp;
+  faStarR = far.faStar;
+  faStar = faStar;
+  faHeart = faHeart;
+  faHeartR = far.faHeart;
+  faList = faList;
+  faFastForward = faFastForward;
+  faFastBackward = faFastBackward;
+  faRedo = faRedo;
+  faUndo = faUndo;
+  faBookmark = faBookmark;
+
   playlist: Array<IMedia> = [
     {
       title: 'Pale Blue Dot',
@@ -48,6 +73,7 @@ export class VideoComponent implements OnInit {
     },
   ];
 
+  currentSpeed = 1;
   currentIndex = 0;
   currentItem: IMedia = this.playlist[this.currentIndex];
 
@@ -66,10 +92,42 @@ export class VideoComponent implements OnInit {
       .subscriptions.ended.subscribe(this.nextVideo.bind(this));
   }
 
+  handlespeed(newSpeed: number) {
+    this.currentSpeed = newSpeed;
+    this.api.playbackRate = newSpeed;
+  }
+
+  forward10sec(api: VgApiService) {
+    console.log(this.api.time);
+    if (this.api.currentTime + 10 >= this.api.duration) {
+      this.api.seekTime(this.api.duration);
+    } else {
+      this.api.seekTime(this.api.currentTime + 10);
+    }
+  }
+
+  backward10sec(api: VgApiService) {
+    if (this.api.currentTime - 10 <= 0) {
+      this.api.seekTime(0);
+    } else {
+      this.api.seekTime(this.api.currentTime - 10);
+    }
+  }
+
   nextVideo() {
     this.currentIndex++;
 
     if (this.currentIndex === this.playlist.length) {
+      this.currentIndex = 0;
+    }
+
+    this.currentItem = this.playlist[this.currentIndex];
+  }
+
+  previousVideo() {
+    this.currentIndex--;
+
+    if (this.currentIndex <= 0) {
       this.currentIndex = 0;
     }
 
@@ -82,5 +140,7 @@ export class VideoComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(faEye);
+  }
 }
