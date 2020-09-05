@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import {
   faEye,
@@ -11,8 +11,13 @@ import {
   faRedo,
   faUndo,
   faBookmark,
+  faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import * as far from '@fortawesome/free-regular-svg-icons';
+
+interface VideoElement extends HTMLVideoElement {
+  requestPictureInPicture(): any;
+}
 
 export interface IMedia {
   title: string;
@@ -40,6 +45,19 @@ export class VideoComponent implements OnInit {
   faRedo = faRedo;
   faUndo = faUndo;
   faBookmark = faBookmark;
+  faShare = faShare;
+
+  @ViewChild('media') videoElement: ElementRef;
+  async pipr() {
+    const video: VideoElement = this.videoElement.nativeElement;
+    await video.requestPictureInPicture();
+  }
+  // ngAfterViewInit() {
+  //   const video: VideoElement = this.videoElement.nativeElement;
+  //   video.addEventListener('play', async (e) => {
+  //     await video.requestPictureInPicture();
+  //   });
+  // }
 
   playlist: Array<IMedia> = [
     {
