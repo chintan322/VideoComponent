@@ -22,9 +22,10 @@ import { VgOverlayPlayModule } from '@videogular/ngx-videogular/overlay-play';
 import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BookmarkModelComponent } from './video/bookmark-model/bookmark-model.component';
 @NgModule({
-  declarations: [AppComponent, VideoComponent],
+  declarations: [AppComponent, VideoComponent, BookmarkModelComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -44,6 +45,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     VgOverlayPlayModule,
     VgBufferingModule,
     FontAwesomeModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
 import {
   faEye,
@@ -14,6 +14,8 @@ import {
   faShare,
 } from '@fortawesome/free-solid-svg-icons';
 import * as far from '@fortawesome/free-regular-svg-icons';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { BookmarkModelComponent } from './bookmark-model/bookmark-model.component';
 
 interface VideoElement extends HTMLVideoElement {
   requestPictureInPicture(): any;
@@ -35,6 +37,7 @@ export interface IMedia {
 export class VideoComponent implements OnInit {
   faEye = faEye;
   faThumbsUp = faThumbsUp;
+  faThumbsUpR = far.faThumbsUp;
   faStarR = far.faStar;
   faStar = faStar;
   faHeart = faHeart;
@@ -48,10 +51,12 @@ export class VideoComponent implements OnInit {
   faShare = faShare;
 
   @ViewChild('media') videoElement: ElementRef;
+
   async pipr() {
     const video: VideoElement = this.videoElement.nativeElement;
     await video.requestPictureInPicture();
   }
+
   // ngAfterViewInit() {
   //   const video: VideoElement = this.videoElement.nativeElement;
   //   video.addEventListener('play', async (e) => {
@@ -108,6 +113,7 @@ export class VideoComponent implements OnInit {
     this.api
       .getDefaultMedia()
       .subscriptions.ended.subscribe(this.nextVideo.bind(this));
+    this.api.volume = 0; //This shold be deleted after development
   }
 
   handlespeed(newSpeed: number) {
@@ -156,7 +162,34 @@ export class VideoComponent implements OnInit {
     this.api.play();
   }
 
-  constructor() {}
+  constructor(private modalService: NgbModal) {}
 
   ngOnInit(): void {}
+
+  active = 'bookmarks';
+
+  openBookmarkModel() {
+    // this.pipr();
+    this.api.pause();
+    const modalRef = this.modalService.open(BookmarkModelComponent);
+    let currentTi: number = this.api.currentTime;
+    modalRef.componentInstance.time = this.NumToTime(currentTi);
+  }
+
+  NumToTime(num) {
+    // var num2: number = num.toFixed(0);
+    var num2: number = Math.floor(num);
+    var hours2: number = Math.floor(num2 / 3600);
+    var hours: String = hours2.toString();
+    if (hours.length < 2) hours = '0' + hours;
+    num2 = num2 % 3600;
+    var minutes2: number = Math.floor(num2 / 60);
+    var minutes: String = minutes2.toString();
+    if (minutes.length < 2) minutes = '0' + minutes;
+    num2 = num2 % 60;
+    var second: String = num2.toString();
+    if (second.length < 2) second = '0' + second;
+
+    return hours + ':' + minutes + ':' + second;
+  }
 }

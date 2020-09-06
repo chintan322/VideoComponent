@@ -1,7 +1,7 @@
 <div class="container-fluid mt-4">
 
 
-  <div class="row" style="height: max-content;">
+  <div class="row" style="position: relative;height: 720px;">
 
     <div class="col-md-8">
       <vg-player (onPlayerReady)="onPlayerReady($event)">
@@ -10,12 +10,14 @@
         <vg-buffering></vg-buffering>
 
 
-        <vg-controls>
+        <vg-controls style="height: fit-content;">
           <vg-play-pause></vg-play-pause>
           <!-- <vg-playback-button></vg-playback-button> -->
+          <div class="m-3 text-white">Speed</div>
           <div class="mt-3">
             <input type="range" min="0.5" max="2" value="{{currentSpeed}}" step="0.1" class="slider form-control-range"
-              (change)="handlespeed($event.target.value)" />
+              (change)="handlespeed($event.target.value)">
+            <span class="range-slider__value">{{currentSpeed}}</span>
           </div>
           <div class="mt-2 ml-2 text-white">
             <h4>{{currentSpeed}}</h4>
@@ -39,7 +41,7 @@
           </vg-scrub-bar>
           <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
 
-          <div class="m-3">
+          <div class="m-3" (click)="openBookmarkModel()">
             <!-- Button trigger modal -->
 
 
@@ -59,9 +61,11 @@
         </vg-controls>
         <!-- <video #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto" crossorigin controls> -->
 
+
         <video #media [vgMedia]="media" [src]="currentItem.src" id="singleVideo" preload="auto" crossorigin
           class="video-stream html5-main-video">
         </video>
+
       </vg-player>
 
       <div class="row ">
@@ -72,7 +76,7 @@
 
           <div class="row float-right mr-2">
             <fa-icon [icon]="faHeartR" class="icon fa-3x"></fa-icon>
-            <fa-icon [icon]="faThumbsUp" class="icon fa-3x ml-5"></fa-icon>&nbsp;&nbsp;
+            <fa-icon [icon]="faThumbsUpR" class="icon fa-3x ml-5"></fa-icon>&nbsp;&nbsp;
             <p class=" display-4 ml-2">122</p>
             <fa-icon [icon]="faEye" class="icon fa-3x ml-5"></fa-icon>&nbsp;&nbsp;
             <p class=" display-4 ml-2">122</p>
@@ -91,49 +95,44 @@
 
       <div class="row float-left">
         <div class="col-12">
-          <div class="card card-primary card-tabs">
-            <div class="card-header p-0 pt-1">
-              <ul class="nav nav-tabs" id="custom-tabs-one-tab" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link active" id="custom-tabs-one-home-tab" data-toggle="pill"
-                    href="#custom-tabs-one-home" role="tab" aria-controls="custom-tabs-one-home"
-                    aria-selected="true">Bookmarks</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="custom-tabs-one-profile-tab" data-toggle="pill"
-                    href="#custom-tabs-one-profile" role="tab" aria-controls="custom-tabs-one-profile"
-                    aria-selected="false">Tags</a>
-                </li>
-              </ul>
-            </div>
-            <div class="card-body">
-              <div class="tab-content" id="custom-tabs-one-tabContent">
-                <div class="tab-pane fade show active" id="custom-tabs-one-home" role="tabpanel"
-                  aria-labelledby="custom-tabs-one-home-tab">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin malesuada lacus ullamcorper dui
-                  molestie, sit amet congue quam finibus. Etiam ultricies nunc non magna feugiat commodo. Etiam odio
-                  magna, mollis auctor felis vitae, ullamcorper ornare ligula. Proin pellentesque tincidunt nisi, vitae
-                  ullamcorper felis aliquam id. Pellentesque habitant morbi tristique senectus et netus et malesuada
-                  fames ac turpis egestas. Proin id orci eu lectus blandit suscipit. Phasellus porta, ante et varius
-                  ornare, sem enim sollicitudin eros, at commodo leo est vitae lacus. Etiam ut porta sem. Proin
-                  porttitor porta nisl, id tempor risus rhoncus quis. In in quam a nibh cursus pulvinar non consequat
-                  neque. Mauris lacus elit, condimentum ac condimentum at, semper vitae lectus. Cras lacinia erat eget
-                  sapien porta consectetur.
-                </div>
-                <div class="tab-pane fade" id="custom-tabs-one-profile" role="tabpanel"
-                  aria-labelledby="custom-tabs-one-profile-tab">
-                  Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula
-                  tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas
-                  sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus.
-                  Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
-                </div>
-              </div>
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
 
+          <!-- <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>Bootstrap</a>
+              <ng-template ngbNavContent>
+                <span>2:30 Mahima</span>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>Tag</a>
+              <ng-template ngbNavContent>
+                <p>Mahima</p>
+              </ng-template>
+            </li>
+          </ul>
+
+          <div [ngbNavOutlet]="nav" class="m-5"></div> -->
+
+          <div class="d-flex m-5">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+              <li ngbNavItem="bookmarks">
+                <a ngbNavLink>bookmarks</a>
+                <ng-template ngbNavContent class="m-5">
+                  <span>2:30 Mahima</span>
+                </ng-template>
+              </li>
+              <li ngbNavItem="tags">
+                <a ngbNavLink>Tags</a>
+                <ng-template ngbNavContent>
+                  <span>Mahima</span>
+                </ng-template>
+              </li>
+            </ul>
+
+            <div [ngbNavOutlet]="nav" class="ml-4"></div>
+          </div>
+
+        </div>
       </div>
 
 
@@ -152,7 +151,7 @@
 
 
 
-    <div class="col-md-4">
+    <div class="col-md-4" style="max-height: 60%;">
 
       <div class="card">
         <div class="card-body text-center">
