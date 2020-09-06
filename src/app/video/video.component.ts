@@ -169,7 +169,7 @@ export class VideoComponent implements OnInit {
   active = 'bookmarks';
 
   openBookmarkModel() {
-    // this.pipr();
+    document.exitFullscreen();
     this.api.pause();
     const modalRef = this.modalService.open(BookmarkModelComponent);
     let currentTi: number = this.api.currentTime;

@@ -41,7 +41,7 @@
           </vg-scrub-bar>
           <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
 
-          <div class="m-3" (click)="openBookmarkModel()">
+          <div class="m-3" (click)="openBookmarkModel()" ngbPopover="Bookmark" triggers="mouseenter:mouseleave">
             <!-- Button trigger modal -->
 
 
@@ -114,7 +114,7 @@
           <div [ngbNavOutlet]="nav" class="m-5"></div> -->
 
           <div class="d-flex m-5">
-            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills" orientation="vertical">
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills " orientation="vertical">
               <li ngbNavItem="bookmarks">
                 <a ngbNavLink>bookmarks</a>
                 <ng-template ngbNavContent class="m-5">
