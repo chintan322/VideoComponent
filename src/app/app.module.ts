@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,8 +14,15 @@ import { VgBufferingModule } from '@videogular/ngx-videogular/buffering';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BookmarkModelComponent } from './video/bookmark-model/bookmark-model.component';
+
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { HeaderComponent } from './header/header.component';
+import { SidebarLeftComponent } from './sidebar-left/sidebar-left.component';
+import { SidebarRightComponent } from './sidebar-right/sidebar-right.component';
+
 @NgModule({
-  declarations: [AppComponent, VideoComponent, BookmarkModelComponent],
+  declarations: [AppComponent, VideoComponent, BookmarkModelComponent, HeaderComponent, SidebarLeftComponent, SidebarRightComponent],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
@@ -27,6 +33,8 @@ import { BookmarkModelComponent } from './video/bookmark-model/bookmark-model.co
     VgBufferingModule,
     FontAwesomeModule,
     NgbModule,
+    MatGridListModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

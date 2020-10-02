@@ -1,0 +1,33 @@
+.icon-color {
+  color: #ffe7d0;
+  text-shadow: 2px 10px rgb(7, 0, 0);
+}
+
+.active {
+  color: #fc6e20;
+}
+
+.sidenav {
+  height: 100%;
+  width: 85px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin-top: 85px;
+  background-color: #181d23;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}

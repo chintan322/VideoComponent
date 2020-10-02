@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 import { VgApiService } from '@videogular/ngx-videogular/core';
+// import { PictureInPictureAlt } from '@material-ui/icons';
 import {
   faEye,
   faThumbsUp,
@@ -49,6 +50,7 @@ export class VideoComponent implements OnInit {
   faUndo = faUndo;
   faBookmark = faBookmark;
   faShare = faShare;
+  // fapip = PictureInPictureAlt;
 
   @ViewChild('media') videoElement: ElementRef;
 
@@ -94,6 +96,21 @@ export class VideoComponent implements OnInit {
       vposter:
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4#t=2',
     },
+    {
+      title: 'Elephants Dream',
+      src: 'http://static.videogular.com/assets/videos/elephants-dream.mp4',
+      type: 'video/mp4',
+      vposter:
+        'http://static.videogular.com/assets/videos/elephants-dream.mp4#t=2',
+    },
+    {
+      title: 'New one',
+      src:
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
+      type: 'video/mp4',
+      vposter:
+        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4#t=2',
+    },
   ];
 
   currentSpeed = 1;
@@ -122,7 +139,6 @@ export class VideoComponent implements OnInit {
   }
 
   forward10sec(api: VgApiService) {
-    console.log(this.api.time);
     if (this.api.currentTime + 10 >= this.api.duration) {
       this.api.seekTime(this.api.duration);
     } else {
@@ -166,11 +182,11 @@ export class VideoComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  active = 'bookmarks';
+  active = 1;
 
   openBookmarkModel() {
-    document.exitFullscreen();
     this.api.pause();
+    document.exitFullscreen();
     const modalRef = this.modalService.open(BookmarkModelComponent);
     let currentTi: number = this.api.currentTime;
     modalRef.componentInstance.time = this.NumToTime(currentTi);
