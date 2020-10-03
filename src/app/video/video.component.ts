@@ -29,6 +29,11 @@ export interface IMedia {
   vposter: string;
 }
 
+export interface BookmarkVideo {
+  time: string;
+  desc: string;
+}
+
 @Component({
   selector: 'app-video',
   templateUrl: './video.component.html',
@@ -68,6 +73,13 @@ export class VideoComponent implements OnInit {
 
   playlist: Array<IMedia> = [
     {
+      title: 'Elephants Dream',
+      src: 'http://static.videogular.com/assets/videos/elephants-dream.mp4',
+      type: 'video/mp4',
+      vposter:
+        'http://static.videogular.com/assets/videos/elephants-dream.mp4#t=2',
+    },
+    {
       title: 'Pale Blue Dot',
       src: 'http://static.videogular.com/assets/videos/videogular.mp4',
       type: 'video/mp4',
@@ -82,13 +94,6 @@ export class VideoComponent implements OnInit {
         'http://static.videogular.com/assets/videos/big_buck_bunny_720p_h264.mov#t=2',
     },
     {
-      title: 'Elephants Dream',
-      src: 'http://static.videogular.com/assets/videos/elephants-dream.mp4',
-      type: 'video/mp4',
-      vposter:
-        'http://static.videogular.com/assets/videos/elephants-dream.mp4#t=2',
-    },
-    {
       title: 'New one',
       src:
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4',
@@ -110,6 +115,17 @@ export class VideoComponent implements OnInit {
       type: 'video/mp4',
       vposter:
         'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4#t=2',
+    },
+  ];
+
+  bookmarksList: Array<BookmarkVideo> = [
+    {
+      time: '02:10',
+      desc: 'Mahima start',
+    },
+    {
+      time: '03:16',
+      desc: 'Agna start',
     },
   ];
 

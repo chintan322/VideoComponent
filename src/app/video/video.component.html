@@ -4,12 +4,12 @@
   <div class="row " style="position: relative;height: 720px;">
 
     <div class="col-md-8" style="height: 768px;">
-      <vg-player (onPlayerReady)="onPlayerReady($event)" class="roundedcustom cardshadow">
+      <vg-player (onPlayerReady)="onPlayerReady($event)" class="roundedcustom cardshadow" vg-responsive="true">
 
         <vg-overlay-play></vg-overlay-play>
         <vg-buffering></vg-buffering>
 
-        <vg-controls style="height: 90px;">
+        <vg-controls style="height: 90px;" [vgAutohide]="true" [vgAutohideTime]="1.5">
           <div class="container-fluid">
             <div class="row col-12">
               <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
@@ -19,56 +19,61 @@
               </vg-scrub-bar>
               <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
             </div>
-            <div class="row col-12">
-              <div (click)="previousVideo()">
-                <fa-icon [icon]="faFastBackward" class="icon text-white fa-sm"></fa-icon>
-              </div>
-              <div (click)="backward10sec($event)" class="ml-3">
-                <fa-icon [icon]="faUndo" class="icon text-white fa-sm"></fa-icon>
-              </div>
+            <div class="container col-12">
+              <div class="row float-left">
+                <div (click)="previousVideo()" class="mt-3">
+                  <fa-icon [icon]="faFastBackward" class="icon text-white fa-lg"></fa-icon>
+                </div>
+                <div (click)="backward10sec($event)" class="ml-3 mt-3">
+                  <fa-icon [icon]="faUndo" class="icon text-white fa-lg"></fa-icon>
+                </div>
 
-              <vg-play-pause></vg-play-pause>
-              <div (click)="forward10sec($event)" class="ml-3">
-                <fa-icon [icon]="faRedo" class="icon text-white fa-sm"></fa-icon>
-              </div>
-              <div (click)="nextVideo()" class="ml-3">
-                <fa-icon [icon]="faFastForward" class="icon text-white fa-sm"></fa-icon>
-              </div>
+                <vg-play-pause></vg-play-pause>
+                <div (click)="forward10sec($event)" class="ml-3 mt-3">
+                  <fa-icon [icon]="faRedo" class="icon text-white fa-lg"></fa-icon>
+                </div>
+                <div (click)="nextVideo()" class="ml-3 mt-3">
+                  <fa-icon [icon]="faFastForward" class="icon text-white fa-lg"></fa-icon>
+                </div>
 
-              <vg-mute></vg-mute>
-              <vg-volume></vg-volume>
-
+                <vg-mute></vg-mute>
+                <vg-volume></vg-volume>
+              </div>
 
 
 
               <!-- <div class="m-3 text-white">Speed</div> -->
-              <div style="margin-left: 650px;">
-                <input type="range" min="0.5" max="2" value="{{currentSpeed}}" step="0.1"
-                  class="slider form-control-range mt-3" (change)="handlespeed($event.target.value)">
-                <span class="range-slider__value">{{currentSpeed}}</span>
+              <div class="row float-right">
+                <div class="ml-3">
+                  <input type="range" min="0.5" max="2" value="{{currentSpeed}}" step="0.1"
+                    class="slider form-control-range mt-3" (change)="handlespeed($event.target.value)">
+                  <span class="range-slider__value">{{currentSpeed}}</span>
+                </div>
+                <div class="ml-3 mt-2 text-white">
+                  <h4>{{currentSpeed}}X</h4>
+                </div>
+
+
+
+
+
+
+                <div class="ml-3 mt-3" (click)="openBookmarkModel()" ngbPopover="Bookmark"
+                  triggers="mouseenter:mouseleave">
+
+                  <fa-icon [icon]="faBookmark" class="icon text-white fa-lg" data-toggle="modal"
+                    data-target="#exampleModal">
+                  </fa-icon>
+
+
+                </div>
+
+                <vg-fullscreen></vg-fullscreen>
+                <div (click)="pipr()" class="ml-2 mt-3">
+                  <fa-icon [icon]="faShare" class="icon text-white fa-lg"></fa-icon>
+                </div>
               </div>
-              <div class="ml-3 mt-2 text-white">
-                <h4>{{currentSpeed}}X</h4>
-              </div>
 
-
-
-
-
-
-              <div class="ml-3" (click)="openBookmarkModel()" ngbPopover="Bookmark" triggers="mouseenter:mouseleave">
-
-                <fa-icon [icon]="faBookmark" class="icon text-white fa-sm" data-toggle="modal"
-                  data-target="#exampleModal">
-                </fa-icon>
-
-
-              </div>
-
-              <vg-fullscreen></vg-fullscreen>
-              <div (click)="pipr()" class="ml-3">
-                <fa-icon [icon]="faShare" class="icon text-white fa-sm"></fa-icon>
-              </div>
             </div>
           </div>
         </vg-controls>
@@ -95,14 +100,21 @@
       </div>
       <div class="row">
         <div class="row col">
-          <fa-icon [icon]="faThumbsUpR" class="icon fa-lg ml-3 white"></fa-icon>&nbsp;&nbsp;
-          <p class="ml-2 white">122</p>
+          <!-- <fa-icon [icon]="faThumbsUpR" class="icon fa-lg ml-3 white"></fa-icon>&nbsp;&nbsp;
+          <p class="ml-2 white">122</p> -->
           <fa-icon [icon]="faEye" class="icon fa-lg ml-3 white"></fa-icon>&nbsp;&nbsp;
           <p class="ml-2 white">122</p>
+
+          <fa-icon [icon]="faStar" class="icon float-left fa-md orange ml-3"></fa-icon>&nbsp;&nbsp;
+          <fa-icon [icon]="faStar" class="icon float-left fa-md orange"></fa-icon>&nbsp;&nbsp;
+          <fa-icon [icon]="faStar" class="icon float-left fa-md orange"></fa-icon>&nbsp;&nbsp;
+          <fa-icon [icon]="faStar" class="icon float-left fa-md orange"></fa-icon>&nbsp;&nbsp;
+          <fa-icon [icon]="faStarR" class="icon float-left fa-md orange"></fa-icon>&nbsp;&nbsp;
         </div>
         <div class="col-5">
           <div class="row float-right">
-            <fa-icon [icon]="faStar" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
+            <p class="ml-2 white">My Rating</p>
+            <fa-icon [icon]="faStar" class="icon float-left fa-md white ml-3"></fa-icon>&nbsp;&nbsp;
             <fa-icon [icon]="faStar" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
             <fa-icon [icon]="faStar" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
             <fa-icon [icon]="faStar" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
@@ -116,7 +128,7 @@
 
         <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
           <li [ngbNavItem]="1">
-            <a ngbNavLink>Bookmarks</a>
+            <a ngbNavLink>TrackInfo</a>
             <ng-template ngbNavContent>
               <p class="text-white">Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu
                 stumptown aliqua, retro
@@ -128,6 +140,19 @@
             </ng-template>
           </li>
           <li [ngbNavItem]="2">
+            <a ngbNavLink>Bookmarks</a>
+            <ng-template ngbNavContent>
+
+              <ul>
+                <li *ngFor="let item of bookmarksList; let $index = index">
+                  <p class="text-white">{{item.time}} : {{item.desc}}</p>
+
+                </li>
+              </ul>
+
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
             <a ngbNavLink>Tags</a>
             <ng-template ngbNavContent>
               <p class="text-white">Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson
@@ -138,9 +163,7 @@
                 Keytar
                 helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes
                 anderson
-                8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party
-                scenester
-                stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.</p>
+              </p>
             </ng-template>
           </li>
         </ul>
@@ -177,21 +200,21 @@
               <div class="container col-12 cardshadow roundedcustom" style="background-color: #181D23;height: 175px;">
 
                 <div class="float-left" (click)="onClickPlaylistItem(item, $index)">
-                  <video style="width: 300px;height: 173px">
+                  <video style="width: 225px;height: 173px">
                     <source src="{{item.vposter}}" type="video/mp4" />
                   </video>
                 </div>
-                <div class="float-right">
+                <div class="float-right mr-5">
 
                   <div class="card-body">
                     <div class="row">
                       <h5 class="card-text float-left white">{{ item.title }}</h5><br>
                     </div>
                     <div class="row">
-                      <fa-icon [icon]="faThumbsUp" class="icon float-left fa-sm white"></fa-icon>&nbsp;&nbsp;
-                      <h5 class="mt-2 white">122</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                      <fa-icon [icon]="faEye" class="icon float-left fa-sm white"></fa-icon>&nbsp;&nbsp;
-                      <h5 class="mt-2 white">122</h5>
+                      <fa-icon [icon]="faThumbsUp" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
+                      <h5 class=" white">122</h5>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <fa-icon [icon]="faEye" class="icon float-left fa-md white"></fa-icon>&nbsp;&nbsp;
+                      <h5 class=" white">122</h5>
                     </div>
                     <div class="row mt-2">
                       <fa-icon [icon]="faStar" class="icon float-left fa-sm white"></fa-icon>&nbsp;&nbsp;

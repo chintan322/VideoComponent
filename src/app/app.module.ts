@@ -22,7 +22,14 @@ import { SidebarLeftComponent } from './sidebar-left/sidebar-left.component';
 import { SidebarRightComponent } from './sidebar-right/sidebar-right.component';
 
 @NgModule({
-  declarations: [AppComponent, VideoComponent, BookmarkModelComponent, HeaderComponent, SidebarLeftComponent, SidebarRightComponent],
+  declarations: [
+    AppComponent,
+    VideoComponent,
+    BookmarkModelComponent,
+    HeaderComponent,
+    SidebarLeftComponent,
+    SidebarRightComponent,
+  ],
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
